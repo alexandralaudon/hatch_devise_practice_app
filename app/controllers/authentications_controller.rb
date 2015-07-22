@@ -4,13 +4,13 @@ class AuthenticationsController < ApplicationController
   end
 
   def create
-    user = User.find_by(email: params[:email])
-    if user && user.authenticate(params[:password])
+    user = User.find_by(first_name: params[:first_name], last_name: params[:last_name])
+    if user. != nil
       session[:user_id] = user.id
       flash[:notice] = 'You have successfully signed in'
       redirect_to bullshit_index_path
     else
-      @invalid_combo = 'Email / Password combination is invalid'
+      flash[:notice] = 'Email / Password combination is invalid'
       render :new
     end
   end
